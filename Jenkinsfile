@@ -5,12 +5,20 @@ pipeline {
         DOCKERHUB_USERNAME = "shashidas"
         GIT_REPO = "https://github.com/shashidas95/mern-todo-app"
         CONFIG_PROJECT_NAME = "mern-todo-app-conf"
-        IMAGE_TAG = new Date().format('yyyyMMdd-HHmm') 
         IMAGE_BE = "mern-todo-be"
         IMAGE_FE = "mern-todo-fe"
     }
-     
+
     stages {
+        stage('SETUP IMAGE TAG') {
+            steps {
+                script {
+                    // Set the IMAGE_TAG dynamically with the current date and time
+                    IMAGE_TAG = new Date().format('yyyyMMdd-HHmm')
+                }
+            }
+        }
+
         stage('CLEANUP WORKSPACE') {
             steps {
                 cleanWs()
@@ -35,12 +43,12 @@ pipeline {
                 script {
                     // Build backend image
                     dir('backend') {
-                        sh "docker build --no-cache  -t ${DOCKERHUB_USERNAME}/${IMAGE_BE}:${IMAGE_TAG} -t ${DOCKERHUB_USERNAME}/${IMAGE_BE}:latest ."
+                        sh "docker build --no-cache -t ${DOCKERHUB_USERNAME}/${IMAGE_BE}:${IMAGE_TAG} -t ${DOCKERHUB_USERNAME}/${IMAGE_BE}:latest ."
                     }
                     
                     // Build frontend image
                     dir('frontend') {
-                        sh "docker build --no-cache  -t ${DOCKERHUB_USERNAME}/${IMAGE_FE}:${IMAGE_TAG} -t ${DOCKERHUB_USERNAME}/${IMAGE_FE}:latest ."
+                        sh "docker build --no-cache -t ${DOCKERHUB_USERNAME}/${IMAGE_FE}:${IMAGE_TAG} -t ${DOCKERHUB_USERNAME}/${IMAGE_FE}:latest ."
                     }
                 }
             }
@@ -70,10 +78,11 @@ pipeline {
                 build job: CONFIG_PROJECT_NAME, parameters: [string(name: 'IMAGE_TAG', value: IMAGE_TAG)]
             }
         }
-                stage("CLEANUP DOCKER CACHES AND IMAGES") {
+
+        stage("CLEANUP DOCKER CACHES AND IMAGES") {
             steps {
                 script {
-                    // Remove all Docker images
+                    // Remove all Docker images and caches
                     sh 'docker system prune -af --volumes'
                 }
             }
