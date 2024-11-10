@@ -1,4 +1,4 @@
-#  Installation
+# Installation
 
 Run the following command to clone the repository
 
