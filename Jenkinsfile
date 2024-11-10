@@ -3,11 +3,11 @@ pipeline {
 
     environment {
         DOCKERHUB_USERNAME = "shashidas"
-        GIT_REPO = "https://github.com/shashidas95/todo"
-        CONFIG_PROJECT_NAME = "todo-config"
+        GIT_REPO = "https://github.com/shashidas95/mern-todo-app"
+        CONFIG_PROJECT_NAME = "mern-todo-app-conf"
         IMAGE_TAG = new Date().format('yyyyMMdd-HHmm') 
-        IMAGE_BE = "todo-be"
-        IMAGE_FE = "todo-fe"
+        IMAGE_BE = "mern-todo-be"
+        IMAGE_FE = "mern-todo-fe"
     }
      
     stages {
@@ -19,7 +19,7 @@ pipeline {
 
         stage("CHECKOUT GIT REPO") {
             steps {
-                git branch: 'phase1', url: "${GIT_REPO}"
+                git branch: 'main', url: "${GIT_REPO}"
             }
         }
 
