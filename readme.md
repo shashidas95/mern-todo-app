@@ -45,7 +45,6 @@ npm start
 ```
 ---
 
-```markdown
 # 🚀 Enterprise MERN DevOps Platform
 ### Production-Grade CI/CD | Kubernetes | AWS | Terraform
 
@@ -90,7 +89,6 @@ This project demonstrates enterprise-level DevOps architecture suitable for real
 
 # 🏗 Enterprise Architecture Overview
 
-```
 
 ```
             Developer
@@ -120,7 +118,6 @@ This project demonstrates enterprise-level DevOps architecture suitable for real
               Users
 ```
 
-```
 
 ---
 
@@ -397,7 +394,6 @@ This project demonstrates:
 Shashi Kanta Das
 DevOps Engineer | Kubernetes | AWS | CI/CD | Terraform
 
-```
 
 ---
 
